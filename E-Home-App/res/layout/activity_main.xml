@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dip"
+        android:text="@string/tv_main_title_text"
+        android:textSize="24sp" />
+
+    <ImageButton
+        android:id="@+id/ib_main_lampState"
+        android:layout_width="150dip"
+        android:layout_height="150dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dip"
+        android:adjustViewBounds="true"
+        android:contentDescription="@drawable/gluehbirne_aus"
+        android:scaleType="fitCenter"
+        android:src="@drawable/loading" />
+
+   
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp" >
+
+        <TextView
+            android:id="@+id/tv_main_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:text="@string/temperature"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tv_main_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="@string/humidity"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_main_home"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@drawable/home_icon"
+        android:src="@drawable/home_icon" />
+
+</LinearLayout>

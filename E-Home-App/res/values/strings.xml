@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">E|Home App</string>
+    <string name="action_settings">Settings</string>
+    <string name="ON">An</string>
+    <string name="OFF">Aus</string>
+    <string name="tv_main_title_text">Lampenzustand:</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="welcome">Willkommen!</string>
+    <string name="tv_login_command">Bitte geben Sie Ihre Zugangsdaten ein.</string>
+    <string name="email">Email</string>
+    <string name="password">Passwort</string>
+    <string name="login">Anmelden</string>
+    <string name="login_remember">Anmeldedaten speichern</string>
+    <string name="progress_dialog_title">Daten werden gesendet</string>
+    <string name="progress_dialog_message">Bitte warten</string>
+    <string name="incorrest_data_message">Inkorrekt. Bitte überprüfen Sie Ihre Eingaben</string>
+    <string name="temperature">Temperatur:</string>
+    <string name="humidity">Luftfeuchtigkeit:</string>
+
+    <color name="black_50">#4f000000</color>
+
+</resources>
