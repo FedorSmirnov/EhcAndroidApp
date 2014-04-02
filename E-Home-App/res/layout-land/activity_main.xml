@@ -66,14 +66,69 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="105dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="100dp"
+            android:layout_marginRight="170dp"
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
             android:contentDescription="@drawable/gluehbirne_aus"
             android:scaleType="fitCenter"
             android:src="@drawable/loading" />
+
+        <ImageView
+            android:id="@+id/iv_main_doorState"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="60dp"
+            android:layout_marginLeft="5dp"
+            android:contentDescription="@drawable/door_closed_icon"
+            android:src="@drawable/door_closed_icon" />
+
+        <ImageView
+            android:id="@+id/iv_main_waterState"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="160dp"
+            android:layout_marginLeft="85dp"
+            android:contentDescription="@drawable/nass_icon"
+            android:src="@drawable/nass_icon" />
+        
+        <ImageButton 
+            android:id="@+id/ib_main_redLamp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="70dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/rot_blinken_icon_aus"
+            android:contentDescription="@drawable/rot_blinken_icon_aus"
+            
+            />
+        
+        <ImageButton 
+            android:id="@+id/ib_main_sound"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="140dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sound_icon_aus"
+            android:contentDescription="@drawable/sound_icon_aus"
+            
+            />
+        
     </RelativeLayout>
 
 </LinearLayout>

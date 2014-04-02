@@ -14,9 +14,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.StringEntity;
-
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
@@ -25,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
@@ -36,23 +35,30 @@ public class MainActivity extends Activity {
 	private Apartment apartment;
 	private boolean atHome = false;
 
-	// Strings generated from the constants
-	private String url_basepath = MyConstants.BASEPATH;
+	// Variables for the display update
+	private Handler updateHandler = new Handler();
+	private int updateInterval = 1000;
+	private Runnable update;
 
+	// Strings generated from the constants
 	private String url_local;
 	private String url_external;
+	private String url_pyserver;
 
 	// Credentials received from the login activity
 	private String email;
 	private String password;
 
 	// activity views
-	
-	
+
 	private ImageButton ib_lampState;
+	private ImageButton ib_redLamp;
+	private ImageButton ib_sound;
 	private TextView tv_temperature;
 	private TextView tv_humidity;
 	private ImageView iv_home;
+	private ImageView iv_doorState;
+	private ImageView iv_waterState;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +78,11 @@ public class MainActivity extends Activity {
 
 		// init the views
 
-		
 		ib_lampState = (ImageButton) findViewById(R.id.ib_main_lampState);
-
+		ib_redLamp = (ImageButton) findViewById(R.id.ib_main_redLamp);
+		ib_sound = (ImageButton) findViewById(R.id.ib_main_sound);
+		iv_doorState = (ImageView) findViewById(R.id.iv_main_doorState);
+		iv_waterState = (ImageView) findViewById(R.id.iv_main_waterState);
 		tv_humidity = (TextView) findViewById(R.id.tv_main_humidity);
 		tv_temperature = (TextView) findViewById(R.id.tv_main_temperature);
 
@@ -93,33 +101,30 @@ public class MainActivity extends Activity {
 			iv_home.setAlpha(0);
 		}
 
-		// get the ini lamp state
-		// HashMap<String, String> inputs = new HashMap<String, String>();
-		// inputs.put("src", "mobile");
-		// inputs.put("email", email);
-		// inputs.put("pw_user", password);
-		// inputs.put("func", "getState");
-		// String url = url_basepath + "mobileInterface";
-		// inputs.put("target", url);
-		// DbAccess task = new DbAccess(inputs, MainActivity.this);
-		// Void[] dummy = null;
-		// task.execute(dummy);
-
-		String url_pyserver = "";
+		url_pyserver = "";
 		if (atHome) {
 			url_pyserver = "http://" + locIp + ":8080/";
 		} else {
 			url_pyserver = "http://" + extIp + ":8080/";
 		}
 
-		PyServerGet stateCheck = new PyServerGet(url_pyserver);
-		Void[] get_dummy = null;
-		try {
-			apartment = stateCheck.execute(get_dummy).get();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		updateDisplay();
+		update = new Runnable() {
+
+			@Override
+			public void run() {
+				PyServerGet stateCheck = new PyServerGet(url_pyserver);
+				Void[] get_dummy = null;
+				try {
+					apartment = stateCheck.execute(get_dummy).get();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				updateDisplay();
+				updateHandler.postDelayed(update, updateInterval);
+			}
+		};
+
+		update.run();
 
 		// set the button listener
 
@@ -148,8 +153,64 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		
+		ib_redLamp.setOnClickListener(new View.OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				String state = apartment
+						.getDevState("Fedors_Zimmer", "Blinken");
+				if (state.equals("on")) {
+					apartment.setDevState("Fedors_Zimmer", "Blinken", "off");
+				} else {
+					apartment.setDevState("Fedors_Zimmer", "Blinken", "on");
+				}
+
+				Void[] post_dummy = null;
+				String url = "";
+				if (atHome) {
+					url = url_local;
+				} else {
+					url = url_external;
+				}
+				PyServerPost pypost = new PyServerPost(MainActivity.this, url);
+				pypost.execute(post_dummy);
+				updateDisplay();
+
+			}
+		});
+
+		ib_sound.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String state = apartment.getDevState("Fedors_Zimmer", "Sound");
+				if (state.equals("on")) {
+					apartment.setDevState("Fedors_Zimmer", "Sound", "off");
+				} else {
+					apartment.setDevState("Fedors_Zimmer", "Sound", "on");
+				}
+
+				Void[] post_dummy = null;
+				String url = "";
+				if (atHome) {
+					url = url_local;
+				} else {
+					url = url_external;
+				}
+				PyServerPost pypost = new PyServerPost(MainActivity.this, url);
+				pypost.execute(post_dummy);
+				updateDisplay();
+
+			}
+		});
+
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		updateHandler.removeCallbacks(update);
 	}
 
 	@Override
@@ -164,15 +225,43 @@ public class MainActivity extends Activity {
 				"temperature");
 		String humidity = apartment.getSensState("Fedors_Zimmer", "humidity");
 		String lamp = apartment.getDevState("Fedors_Zimmer", "Lampe");
+		String door = apartment.getSensState("Fedors_Zimmer", "Tuer");
+		String water = apartment.getSensState("Fedors_Zimmer", "Wasserstand");
+		String redLamp = apartment.getDevState("Fedors_Zimmer", "Blinken");
+		String sound = apartment.getDevState("Fedors_Zimmer", "Sound");
 
 		tv_humidity.setText(humidity + "%");
 		tv_temperature.setText(temperature + "°C");
 
+		if (redLamp.equals("on")) {
+			ib_redLamp.setImageResource(R.drawable.rot_blinken_icon_an);
+		} else {
+			ib_redLamp.setImageResource(R.drawable.rot_blinken_icon_aus);
+		}
+
+		if (sound.equals("on")) {
+			ib_sound.setImageResource(R.drawable.sound_icon_an);
+		} else {
+			ib_sound.setImageResource(R.drawable.sound_icon_aus);
+		}
+
+		if (water.equals("wet")) {
+			iv_waterState.setImageResource(R.drawable.nass_icon);
+		} else {
+			iv_waterState.setImageResource(R.drawable.trocken_icon);
+		}
+
+		if (door.equals("closed")) {
+			iv_doorState.setImageResource(R.drawable.door_closed_icon);
+		} else {
+			iv_doorState.setImageResource(R.drawable.door_open_icon);
+		}
+
 		if (lamp.equals("on")) {
-			
+
 			ib_lampState.setImageResource(R.drawable.gluehbirne_an);
 		} else {
-			
+
 			ib_lampState.setImageResource(R.drawable.gluehbirne_aus);
 		}
 
