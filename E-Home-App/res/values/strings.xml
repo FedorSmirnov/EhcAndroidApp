@@ -18,6 +18,17 @@
     <string name="incorrest_data_message">Inkorrekt. Bitte überprüfen Sie Ihre Eingaben</string>
     <string name="temperature">Temperatur:</string>
     <string name="humidity">Luftfeuchtigkeit:</string>
+    <string name="lamp_behavior">Lampenverhalten:</string>
+    <string name="lamp_behavior_norm">An/Aus</string>
+    <string name="lamp_behavior_move">An/Bewegungsgesteuert</string>
+    <string name="control">Steuerung:</string>
+    <string name="lampTime">Zeit, nach der die Lampe ausgeht:</string>
+    <string name="saveValues">Übernehmen</string>
+    <string name="ruleTitle">Einstellungen</string>
+    <string name="no_alarm">Derzeit liegen keine Meldungen vor.</string>
+    <string name="alarm">Es gibt folgende Meldungen:</string>
+    <string name="back">Zurück</string>
+    <string name="alaDia_Title">Meldungen</string>
 
     
 

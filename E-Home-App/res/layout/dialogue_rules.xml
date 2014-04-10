@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="400dp"
+    android:minHeight="200dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_diaRule_lampBehavTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lamp_behavior"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_diaRule_lampControl"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/control" />
+
+    <RadioGroup
+        android:id="@+id/rg_diaRule_lampBehav"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/rb_diaRule_lampBehavNorm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/lamp_behavior_norm" />
+
+        <RadioButton
+            android:id="@+id/rb_diaRule_lampBehavMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lamp_behavior_move" />
+    </RadioGroup>
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/b_diaRule_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saveValues" />
+
+</LinearLayout>

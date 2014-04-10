@@ -52,15 +52,40 @@
             android:text="@string/humidity"
             android:textSize="20sp" >
         </TextView>
-        
-        <Button 
-            android:id="@+id/b_main_rules"
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            
-            />
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/ib_main_diaRules"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:background="@drawable/image_button_background"
+                android:contentDescription="@drawable/settings_icon"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/settings_icon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/ib_main_diaAlarms"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:background="@drawable/image_button_background"
+                android:contentDescription="@drawable/alarm_icon"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/alarm_icon" />
+        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout
@@ -99,45 +124,40 @@
             android:id="@+id/iv_main_waterState"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginBottom="160dp"
             android:layout_marginLeft="85dp"
             android:contentDescription="@drawable/nass_icon"
             android:src="@drawable/nass_icon" />
-        
-        <ImageButton 
+
+        <ImageButton
             android:id="@+id/ib_main_redLamp"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginBottom="25dp"
             android:layout_marginLeft="70dp"
             android:adjustViewBounds="true"
             android:background="@drawable/image_button_background"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/rot_blinken_icon_aus"
             android:contentDescription="@drawable/rot_blinken_icon_aus"
-            
-            />
-        
-        <ImageButton 
+            android:scaleType="fitCenter"
+            android:src="@drawable/rot_blinken_icon_aus" />
+
+        <ImageButton
             android:id="@+id/ib_main_sound"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginBottom="25dp"
             android:layout_marginLeft="140dp"
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/sound_icon_aus"
             android:contentDescription="@drawable/sound_icon_aus"
-            
-            />
-        
+            android:scaleType="fitCenter"
+            android:src="@drawable/sound_icon_aus" />
     </RelativeLayout>
 
 </LinearLayout>

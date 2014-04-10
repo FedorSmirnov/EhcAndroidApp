@@ -9,6 +9,25 @@ public class Apartment {
 	private String Password;
 	private boolean lamp_movement;
 	private int no_movement_time;
+	private boolean alarm;
+
+	private ArrayList<String> alarmList;
+
+	public ArrayList<String> getAlarmList() {
+		return alarmList;
+	}
+
+	public void setAlarmList(ArrayList<String> alarmList) {
+		this.alarmList = alarmList;
+	}
+
+	public boolean isAlarm() {
+		return alarm;
+	}
+
+	public void setAlarm(boolean alarm) {
+		this.alarm = alarm;
+	}
 
 	public boolean getLamp_movement() {
 		return lamp_movement;
@@ -116,12 +135,12 @@ public class Apartment {
 		return "Failure";
 
 	}
-	
-	public void setDevState(String room_name, String dev_name, String dev_state){
-		for (Room room:this.rooms){
-			if (room.getName().equals(room_name)){
-				for (Device device:room.getDevices()){
-					if (device.getName().equals(dev_name)){
+
+	public void setDevState(String room_name, String dev_name, String dev_state) {
+		for (Room room : this.rooms) {
+			if (room.getName().equals(room_name)) {
+				for (Device device : room.getDevices()) {
+					if (device.getName().equals(dev_name)) {
 						device.setState(dev_state);
 						return;
 					}

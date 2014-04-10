@@ -18,6 +18,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -29,9 +30,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
+
+	private Context context = this;
 
 	private Apartment apartment;
 	private boolean atHome = false;
@@ -60,7 +64,8 @@ public class MainActivity extends Activity {
 	private ImageView iv_home;
 	private ImageView iv_doorState;
 	private ImageView iv_waterState;
-	private Button b_rules;
+	private ImageButton ib_rulesDia;
+	private ImageButton ib_alarmDia;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +94,10 @@ public class MainActivity extends Activity {
 		tv_temperature = (TextView) findViewById(R.id.tv_main_temperature);
 
 		iv_home = (ImageView) findViewById(R.id.iv_main_home);
-		
-		b_rules = (Button) findViewById(R.id.b_main_rules);
+
+		ib_rulesDia = (ImageButton) findViewById(R.id.ib_main_diaRules);
+
+		ib_alarmDia = (ImageButton) findViewById(R.id.ib_main_diaAlarms);
 
 		// Check whether the PyServer can be accessed through the local Ip
 		LocalCheck locCheck = new LocalCheck();
@@ -129,19 +136,8 @@ public class MainActivity extends Activity {
 		};
 
 		update.run();
-		
-		b_rules.setText(String.valueOf(apartment.getLamp_movement()));
-		b_rules.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				apartment.setLamp_movement(!apartment.getLamp_movement());
-				sendMessage();
-				b_rules.setText(String.valueOf(apartment.getLamp_movement()));
-			}
-		});
 
-		// set the button listener
+		// set the button listeners
 
 		ib_lampState.setOnClickListener(new View.OnClickListener() {
 
@@ -192,8 +188,101 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		// The listener for the rules dialogue
+
+		ib_rulesDia.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// Create the dialogue
+
+				final Dialog ruleDia = new Dialog(context);
+				ruleDia.setContentView(R.layout.dialogue_rules);
+
+				ruleDia.setTitle(R.string.ruleTitle);
+
+				// Init the dialogue views
+				Button b_save = (Button) ruleDia
+						.findViewById(R.id.b_diaRule_confirm);
+				final RadioButton rb_dia_normal = (RadioButton) ruleDia
+						.findViewById(R.id.rb_diaRule_lampBehavNorm);
+				final RadioButton rb_dia_move = (RadioButton) ruleDia
+						.findViewById(R.id.rb_diaRule_lampBehavMove);
+
+				boolean cur_lampMode = apartment.getLamp_movement();
+
+				if (cur_lampMode) {
+					rb_dia_move.setChecked(true);
+					rb_dia_normal.setChecked(false);
+				} else {
+					rb_dia_move.setChecked(false);
+					rb_dia_normal.setChecked(true);
+				}
+
+				b_save.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+
+						apartment.setLamp_movement(rb_dia_move.isChecked());
+						sendMessage();
+
+						ruleDia.dismiss();
+
+					}
+				});
+
+				ruleDia.show();
+
+			}
+		});
+
+		// the listener for the alarm dialogue
+		ib_alarmDia.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				final Dialog alaDia = new Dialog(context);
+				alaDia.setContentView(R.layout.dialogue_alarms);
+
+				TextView content = (TextView) alaDia
+						.findViewById(R.id.tv_diaAlarm_Content);
+				Button confirm = (Button) alaDia
+						.findViewById(R.id.b_diaAlarm_ok);
+
+				alaDia.setTitle(R.string.alaDia_Title);
+
+				if (apartment.isAlarm()) {
+
+					String contentString = getResources().getString(
+							R.string.alarm);
+
+					for (int i = 0; i < apartment.getAlarmList().size(); i++) {
+						contentString += "\n\n-"
+								+ apartment.getAlarmList().get(i);
+					}
+
+					content.setText(contentString);
+				} else {
+					content.setText(R.string.no_alarm);
+				}
+
+				confirm.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						alaDia.dismiss();
+
+					}
+				});
+
+				alaDia.show();
+
+			}
+		});
+
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
@@ -207,8 +296,8 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	private void sendMessage(){
+
+	private void sendMessage() {
 		Void[] post_dummy = null;
 		String url = "";
 		if (atHome) {
@@ -262,8 +351,18 @@ public class MainActivity extends Activity {
 
 			ib_lampState.setImageResource(R.drawable.gluehbirne_an);
 		} else {
+			if (apartment.getLamp_movement()) {
+				ib_lampState.setImageResource(R.drawable.gluehbirne_move);
+			} else {
 
-			ib_lampState.setImageResource(R.drawable.gluehbirne_aus);
+				ib_lampState.setImageResource(R.drawable.gluehbirne_aus);
+			}
+		}
+
+		if (apartment.isAlarm()) {
+			ib_alarmDia.setImageResource(R.drawable.alarm_icon);
+		} else {
+			ib_alarmDia.setImageResource(R.drawable.no_alarm_icon);
 		}
 
 	}
