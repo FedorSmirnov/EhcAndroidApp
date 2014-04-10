@@ -52,6 +52,15 @@
             android:text="@string/humidity"
             android:textSize="20sp" >
         </TextView>
+        
+        <Button 
+            android:id="@+id/b_main_rules"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            
+            />
     </LinearLayout>
 
     <RelativeLayout
@@ -70,7 +79,7 @@
             android:layout_marginBottom="100dp"
             android:layout_marginRight="170dp"
             android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
+            android:background="@drawable/image_button_background"
             android:contentDescription="@drawable/gluehbirne_aus"
             android:scaleType="fitCenter"
             android:src="@drawable/loading" />
@@ -104,7 +113,7 @@
             android:layout_marginBottom="25dp"
             android:layout_marginLeft="70dp"
             android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
+            android:background="@drawable/image_button_background"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:scaleType="fitCenter"

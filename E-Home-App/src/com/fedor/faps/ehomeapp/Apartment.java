@@ -7,6 +7,24 @@ public class Apartment {
 	private ArrayList<Room> rooms;
 	private String User;
 	private String Password;
+	private boolean lamp_movement;
+	private int no_movement_time;
+
+	public boolean getLamp_movement() {
+		return lamp_movement;
+	}
+
+	public void setLamp_movement(boolean lamp_movement) {
+		this.lamp_movement = lamp_movement;
+	}
+
+	public int getNo_movement_time() {
+		return no_movement_time;
+	}
+
+	public void setNo_movement_time(int no_movement_time) {
+		this.no_movement_time = no_movement_time;
+	}
 
 	public static class Room {
 

@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -59,6 +60,7 @@ public class MainActivity extends Activity {
 	private ImageView iv_home;
 	private ImageView iv_doorState;
 	private ImageView iv_waterState;
+	private Button b_rules;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,8 @@ public class MainActivity extends Activity {
 		tv_temperature = (TextView) findViewById(R.id.tv_main_temperature);
 
 		iv_home = (ImageView) findViewById(R.id.iv_main_home);
+		
+		b_rules = (Button) findViewById(R.id.b_main_rules);
 
 		// Check whether the PyServer can be accessed through the local Ip
 		LocalCheck locCheck = new LocalCheck();
@@ -125,6 +129,17 @@ public class MainActivity extends Activity {
 		};
 
 		update.run();
+		
+		b_rules.setText(String.valueOf(apartment.getLamp_movement()));
+		b_rules.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				apartment.setLamp_movement(!apartment.getLamp_movement());
+				sendMessage();
+				b_rules.setText(String.valueOf(apartment.getLamp_movement()));
+			}
+		});
 
 		// set the button listener
 
@@ -139,16 +154,7 @@ public class MainActivity extends Activity {
 					apartment.setDevState("Fedors_Zimmer", "Lampe", "on");
 				}
 
-				Void[] post_dummy = null;
-				String url = "";
-				if (atHome) {
-					url = url_local;
-				} else {
-					url = url_external;
-				}
-				PyServerPost pypost = new PyServerPost(MainActivity.this, url);
-				pypost.execute(post_dummy);
-				updateDisplay();
+				sendMessage();
 
 			}
 		});
@@ -165,16 +171,7 @@ public class MainActivity extends Activity {
 					apartment.setDevState("Fedors_Zimmer", "Blinken", "on");
 				}
 
-				Void[] post_dummy = null;
-				String url = "";
-				if (atHome) {
-					url = url_local;
-				} else {
-					url = url_external;
-				}
-				PyServerPost pypost = new PyServerPost(MainActivity.this, url);
-				pypost.execute(post_dummy);
-				updateDisplay();
+				sendMessage();
 
 			}
 		});
@@ -190,16 +187,7 @@ public class MainActivity extends Activity {
 					apartment.setDevState("Fedors_Zimmer", "Sound", "on");
 				}
 
-				Void[] post_dummy = null;
-				String url = "";
-				if (atHome) {
-					url = url_local;
-				} else {
-					url = url_external;
-				}
-				PyServerPost pypost = new PyServerPost(MainActivity.this, url);
-				pypost.execute(post_dummy);
-				updateDisplay();
+				sendMessage();
 
 			}
 		});
@@ -218,6 +206,19 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	private void sendMessage(){
+		Void[] post_dummy = null;
+		String url = "";
+		if (atHome) {
+			url = url_local;
+		} else {
+			url = url_external;
+		}
+		PyServerPost pypost = new PyServerPost(MainActivity.this, url);
+		pypost.execute(post_dummy);
+		updateDisplay();
 	}
 
 	private void updateDisplay() {

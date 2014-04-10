@@ -19,6 +19,6 @@
     <string name="temperature">Temperatur:</string>
     <string name="humidity">Luftfeuchtigkeit:</string>
 
-    <color name="black_50">#4f000000</color>
+    
 
 </resources>
