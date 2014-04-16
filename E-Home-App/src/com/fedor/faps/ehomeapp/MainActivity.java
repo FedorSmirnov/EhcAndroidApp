@@ -30,7 +30,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -64,6 +66,8 @@ public class MainActivity extends Activity {
 	private ImageView iv_home;
 	private ImageView iv_doorState;
 	private ImageView iv_waterState;
+	private ImageView iv_window;
+	private ImageView iv_flowers;
 	private ImageButton ib_rulesDia;
 	private ImageButton ib_alarmDia;
 
@@ -99,6 +103,10 @@ public class MainActivity extends Activity {
 
 		ib_alarmDia = (ImageButton) findViewById(R.id.ib_main_diaAlarms);
 
+		iv_window = (ImageView) findViewById(R.id.iv_main_window);
+
+		iv_flowers = (ImageView) findViewById(R.id.iv_main_flowers);
+
 		// Check whether the PyServer can be accessed through the local Ip
 		LocalCheck locCheck = new LocalCheck();
 		Void[] locDummy = null;
@@ -109,7 +117,7 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		}
 		if (!atHome) {
-			iv_home.setAlpha(0);
+			iv_home.setImageResource(R.drawable.not_home_icon);
 		}
 
 		url_pyserver = "";
@@ -172,6 +180,12 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		// Disable the redLamp button
+		ib_redLamp.setClickable(false);
+		ib_sound.setClickable(false);
+		ib_redLamp.setVisibility(View.INVISIBLE);
+		ib_sound.setVisibility(View.INVISIBLE);
+
 		ib_sound.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -209,6 +223,103 @@ public class MainActivity extends Activity {
 				final RadioButton rb_dia_move = (RadioButton) ruleDia
 						.findViewById(R.id.rb_diaRule_lampBehavMove);
 
+				final Button moveBehaveTitle = (Button) ruleDia
+						.findViewById(R.id.b_diaRule_lampBehavTitle);
+				final TextView moveBehaveText = (TextView) ruleDia
+						.findViewById(R.id.tv_diaRule_lampControl);
+				final RadioGroup moveBehaveRadio = (RadioGroup) ruleDia
+						.findViewById(R.id.rg_diaRule_lampBehav);
+				final TextView lightTimeTitle = (TextView) ruleDia
+						.findViewById(R.id.tv_diaRule_lightTimeTitle);
+				final LinearLayout ll_lightTime = (LinearLayout) ruleDia
+						.findViewById(R.id.ll_diaRule_timeControlLight);
+
+				final TextView tv_diaRule_lightTime_value = (TextView) ruleDia
+						.findViewById(R.id.tv_diaRule_timeControlLight_Value);
+				final Button b_diaRule_light_minus = (Button) ruleDia
+						.findViewById(R.id.b_diaRule_lightTime_minus);
+				final Button b_diaRule_light_plus = (Button) ruleDia
+						.findViewById(R.id.b_diaRule_lightTime_plus);
+
+				final Button b_flowerRule_expand = (Button) ruleDia
+						.findViewById(R.id.b_diaRule_flowerTitle);
+				final LinearLayout ll_flowerRule_expand = (LinearLayout) ruleDia
+						.findViewById(R.id.ll_diaRule_expand_flower);
+				final TextView tv_flowerTime_value = (TextView) ruleDia
+						.findViewById(R.id.tv_diaRule_flower_Value);
+				final Button b_flower_minus = (Button) ruleDia
+						.findViewById(R.id.b_diaRule_flower_minus);
+				final Button b_flower_plus = (Button) ruleDia
+						.findViewById(R.id.b_diaRule_flower_plus);
+
+				moveBehaveText.setVisibility(View.GONE);
+				moveBehaveRadio.setVisibility(View.GONE);
+				lightTimeTitle.setVisibility(View.GONE);
+				ll_lightTime.setVisibility(View.GONE);
+				ll_flowerRule_expand.setVisibility(View.GONE);
+
+				// The expansion of the light rule section
+				moveBehaveTitle.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						if (moveBehaveText.getVisibility() == View.GONE) {
+							moveBehaveText.setVisibility(View.VISIBLE);
+							moveBehaveRadio.setVisibility(View.VISIBLE);
+							lightTimeTitle.setVisibility(View.VISIBLE);
+							ll_lightTime.setVisibility(View.VISIBLE);
+						} else {
+							moveBehaveText.setVisibility(View.GONE);
+							moveBehaveRadio.setVisibility(View.GONE);
+							lightTimeTitle.setVisibility(View.GONE);
+							ll_lightTime.setVisibility(View.GONE);
+						}
+
+					}
+				});
+
+				// init of the time value
+				int light_on_time = apartment.getNo_movement_time();
+				String value = String.valueOf(light_on_time);
+				tv_diaRule_lightTime_value.setText(value);
+
+				// time_button behavior
+				b_diaRule_light_minus
+						.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								int curVal = Integer
+										.valueOf(tv_diaRule_lightTime_value
+												.getText().toString());
+								int newVal = curVal - 30;
+
+								if (newVal >= 30) {
+									tv_diaRule_lightTime_value.setText(String
+											.valueOf(newVal));
+								}
+
+							}
+						});
+				b_diaRule_light_plus
+						.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								int curVal = Integer
+										.valueOf(tv_diaRule_lightTime_value
+												.getText().toString());
+								int newVal = curVal + 30;
+
+								if (newVal <= 300) {
+									tv_diaRule_lightTime_value.setText(String
+											.valueOf(newVal));
+								}
+
+							}
+						});
+
+				// Init the state of the radio buttons
 				boolean cur_lampMode = apartment.getLamp_movement();
 
 				if (cur_lampMode) {
@@ -219,10 +330,71 @@ public class MainActivity extends Activity {
 					rb_dia_normal.setChecked(true);
 				}
 
+				// The flower rule section
+				b_flowerRule_expand
+						.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								if (ll_flowerRule_expand.getVisibility() == View.GONE) {
+									ll_flowerRule_expand
+											.setVisibility(View.VISIBLE);
+								} else {
+									ll_flowerRule_expand
+											.setVisibility(View.GONE);
+								}
+
+							}
+						});
+
+				// the flower time adjustment
+
+				tv_flowerTime_value.setText(String.valueOf(apartment
+						.getNo_water_time() / 60));
+
+				b_flower_minus.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						int curVal = Integer.valueOf(tv_flowerTime_value
+								.getText().toString());
+
+						curVal--;
+						if (curVal >= 1) {
+							tv_flowerTime_value.setText(String.valueOf(curVal));
+						}
+
+					}
+				});
+
+				b_flower_plus.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						int curVal = Integer.valueOf(tv_flowerTime_value
+								.getText().toString());
+
+						curVal++;
+						if (curVal <= 14) {
+							tv_flowerTime_value.setText(String.valueOf(curVal));
+						}
+
+					}
+				});
+
+				// The confirm button
 				b_save.setOnClickListener(new View.OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
+
+						int newLampTime = Integer
+								.valueOf(tv_diaRule_lightTime_value.getText()
+										.toString());
+						int newFlowerTime = Integer.valueOf(tv_flowerTime_value
+								.getText().toString()) * 60;
+						apartment.setNo_water_time(newFlowerTime);
+						apartment.setNo_movement_time(newLampTime);
 
 						apartment.setLamp_movement(rb_dia_move.isChecked());
 						sendMessage();
@@ -245,6 +417,9 @@ public class MainActivity extends Activity {
 				final Dialog alaDia = new Dialog(context);
 				alaDia.setContentView(R.layout.dialogue_alarms);
 
+				TextView urgent = (TextView) alaDia
+						.findViewById(R.id.tv_diaAlarm_urgent);
+
 				TextView content = (TextView) alaDia
 						.findViewById(R.id.tv_diaAlarm_Content);
 				Button confirm = (Button) alaDia
@@ -252,13 +427,28 @@ public class MainActivity extends Activity {
 
 				alaDia.setTitle(R.string.alaDia_Title);
 
-				if (apartment.isAlarm()) {
+				if (apartment.isAlarm() || apartment.isAlarm_urgent()) {
 
-					String contentString = getResources().getString(
-							R.string.alarm);
+					String urgentString = "";
+
+					if (apartment.isAlarm_urgent()) {
+						urgentString = "DRINGEND:\n\n";
+
+						for (int i = 0; i < apartment.getAlarmUrgentList()
+								.size(); i++) {
+							urgentString += "-"
+									+ apartment.getAlarmUrgentList().get(i)
+									+ "\n";
+						}
+
+					}
+
+					urgent.setText(urgentString);
+
+					String contentString = "";
 
 					for (int i = 0; i < apartment.getAlarmList().size(); i++) {
-						contentString += "\n\n-"
+						contentString += "\n-"
 								+ apartment.getAlarmList().get(i);
 					}
 
@@ -316,9 +506,11 @@ public class MainActivity extends Activity {
 		String humidity = apartment.getSensState("Fedors_Zimmer", "humidity");
 		String lamp = apartment.getDevState("Fedors_Zimmer", "Lampe");
 		String door = apartment.getSensState("Fedors_Zimmer", "Tuer");
-		String water = apartment.getSensState("Fedors_Zimmer", "Wasserstand");
+		String water = apartment.getSensState("Fedors_Zimmer", "Wasseralarm");
 		String redLamp = apartment.getDevState("Fedors_Zimmer", "Blinken");
 		String sound = apartment.getDevState("Fedors_Zimmer", "Sound");
+		String window = apartment.getSensState("Fedors_Zimmer", "Fenster");
+		String flowers = apartment.getSensState("Fedors_Zimmer", "Wasserstand");
 
 		tv_humidity.setText(humidity + "%");
 		tv_temperature.setText(temperature + "°C");
@@ -341,10 +533,22 @@ public class MainActivity extends Activity {
 			iv_waterState.setImageResource(R.drawable.trocken_icon);
 		}
 
+		if (flowers.equals("wet")) {
+			iv_flowers.setImageResource(R.drawable.giesskanne_icon_ok);
+		} else {
+			iv_flowers.setImageResource(R.drawable.giesskanne_icon_not_ok);
+		}
+
 		if (door.equals("closed")) {
 			iv_doorState.setImageResource(R.drawable.door_closed_icon);
 		} else {
 			iv_doorState.setImageResource(R.drawable.door_open_icon);
+		}
+
+		if (window.equals("open")) {
+			iv_window.setImageResource(R.drawable.windows_icon_open);
+		} else {
+			iv_window.setImageResource(R.drawable.windows_icon_closed);
 		}
 
 		if (lamp.equals("on")) {
@@ -359,7 +563,7 @@ public class MainActivity extends Activity {
 			}
 		}
 
-		if (apartment.isAlarm()) {
+		if (apartment.isAlarm() || apartment.isAlarm_urgent()) {
 			ib_alarmDia.setImageResource(R.drawable.alarm_icon);
 		} else {
 			ib_alarmDia.setImageResource(R.drawable.no_alarm_icon);

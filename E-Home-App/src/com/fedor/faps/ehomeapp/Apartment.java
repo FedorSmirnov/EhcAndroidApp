@@ -9,9 +9,36 @@ public class Apartment {
 	private String Password;
 	private boolean lamp_movement;
 	private int no_movement_time;
+	private int no_water_time;
 	private boolean alarm;
+	private boolean alarm_urgent;
 
 	private ArrayList<String> alarmList;
+	private ArrayList<String> alarmUrgentList;
+
+	public boolean isAlarm_urgent() {
+		return alarm_urgent;
+	}
+
+	public void setAlarm_urgent(boolean alarm_urgent) {
+		this.alarm_urgent = alarm_urgent;
+	}
+
+	public ArrayList<String> getAlarmUrgentList() {
+		return alarmUrgentList;
+	}
+
+	public void setAlarmUrgentList(ArrayList<String> alarmUrgentList) {
+		this.alarmUrgentList = alarmUrgentList;
+	}
+
+	public int getNo_water_time() {
+		return no_water_time;
+	}
+
+	public void setNo_water_time(int no_water_time) {
+		this.no_water_time = no_water_time;
+	}
 
 	public ArrayList<String> getAlarmList() {
 		return alarmList;

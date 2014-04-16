@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="400dp" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/b_diaRule_lampBehavTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/lamp_behavior"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_diaRule_lampControl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/b_diaRule_lampBehavTitle"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/control" />
+
+            <RadioGroup
+                android:id="@+id/rg_diaRule_lampBehav"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tv_diaRule_lampControl"
+                android:layout_below="@id/tv_diaRule_lampControl"
+                android:layout_marginTop="5dp" >
+
+                <RadioButton
+                    android:id="@+id/rb_diaRule_lampBehavNorm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/lamp_behavior_norm" />
+
+                <RadioButton
+                    android:id="@+id/rb_diaRule_lampBehavMove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lamp_behavior_move" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_diaRule_lightTimeTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tv_diaRule_lampControl"
+                android:layout_below="@id/rg_diaRule_lampBehav"
+                android:layout_marginTop="5dp"
+                android:text="@string/diaRule_lightTimeTitle" />
+
+            <LinearLayout
+                android:id="@+id/ll_diaRule_timeControlLight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_diaRule_lightTimeTitle"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/b_diaRule_lightTime_minus"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/minus" />
+
+                <TextView
+                    android:id="@+id/tv_diaRule_timeControlLight_Value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_value"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tv_diaRule_timeControlLight_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/seconds"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/b_diaRule_lightTime_plus"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plus" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/b_diaRule_flowerTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/b_diaRule_lampBehavTitle"
+                android:layout_below="@id/ll_diaRule_timeControlLight"
+                android:layout_marginTop="10dp"
+                android:text="@string/flowerRule"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_diaRule_expand_flower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/b_diaRule_flowerTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_diaRule_flower_title1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/flowerRuleText1" />
+
+                <LinearLayout
+                    android:id="@+id/ll_diaRule_flowerSetTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/b_diaRule_flower_minus"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/minus" />
+
+                    <TextView
+                        android:id="@+id/tv_diaRule_flower_Value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_value"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/tv_diaRule_flower_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/days"
+                        android:textSize="24sp" />
+
+                    <Button
+                        android:id="@+id/b_diaRule_flower_plus"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/plus" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_diaRule_flower_title2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/flowerRuleText2" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/b_diaRule_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_diaRule_expand_flower"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/saveValues" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

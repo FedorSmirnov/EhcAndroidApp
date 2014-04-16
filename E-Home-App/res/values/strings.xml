@@ -18,7 +18,7 @@
     <string name="incorrest_data_message">Inkorrekt. Bitte überprüfen Sie Ihre Eingaben</string>
     <string name="temperature">Temperatur:</string>
     <string name="humidity">Luftfeuchtigkeit:</string>
-    <string name="lamp_behavior">Lampenverhalten:</string>
+    <string name="lamp_behavior">Lampenverhalten</string>
     <string name="lamp_behavior_norm">An/Aus</string>
     <string name="lamp_behavior_move">An/Bewegungsgesteuert</string>
     <string name="control">Steuerung:</string>
@@ -29,6 +29,15 @@
     <string name="alarm">Es gibt folgende Meldungen:</string>
     <string name="back">Zurück</string>
     <string name="alaDia_Title">Meldungen</string>
+    <string name="diaRule_lightTimeTitle">Bei Bewegung ist das Licht an für:</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="no_value">--</string>
+    <string name="seconds">Sekunden</string>
+    <string name="days">Tage</string>
+    <string name="flowerRule">Blumenkontrolle</string>
+    <string name="flowerRuleText1">Benachrichtigung</string>
+    <string name="flowerRuleText2">nach dem letzten Giessen</string>
 
     
 
