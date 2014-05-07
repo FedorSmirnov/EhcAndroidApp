@@ -31,30 +31,31 @@ public final class R {
         public static final int door_closed_icon=0x7f020002;
         public static final int door_open_icon=0x7f020003;
         public static final int e_home_logo=0x7f020004;
-        public static final int giesskanne_icon_not_ok=0x7f020005;
-        public static final int giesskanne_icon_ok=0x7f020006;
-        public static final int gluehbirne_an=0x7f020007;
-        public static final int gluehbirne_aus=0x7f020008;
-        public static final int gluehbirne_move=0x7f020009;
-        public static final int home_icon=0x7f02000a;
-        public static final int ic_launcher=0x7f02000b;
-        public static final int icon_humidity=0x7f02000c;
-        public static final int icon_temperature=0x7f02000d;
-        public static final int image_button_background=0x7f02000e;
-        public static final int image_button_background_white=0x7f02000f;
-        public static final int loading=0x7f020010;
-        public static final int nass_icon=0x7f020011;
-        public static final int no_alarm_icon=0x7f020012;
-        public static final int not_home_icon=0x7f020013;
-        public static final int praterstr3=0x7f020014;
-        public static final int rot_blinken_icon_an=0x7f020015;
-        public static final int rot_blinken_icon_aus=0x7f020016;
-        public static final int settings_icon=0x7f020017;
-        public static final int sound_icon_an=0x7f020018;
-        public static final int sound_icon_aus=0x7f020019;
-        public static final int trocken_icon=0x7f02001a;
-        public static final int windows_icon_closed=0x7f02001b;
-        public static final int windows_icon_open=0x7f02001c;
+        public static final int friedrich_bauer_mittel=0x7f020005;
+        public static final int giesskanne_icon_not_ok=0x7f020006;
+        public static final int giesskanne_icon_ok=0x7f020007;
+        public static final int gluehbirne_an=0x7f020008;
+        public static final int gluehbirne_aus=0x7f020009;
+        public static final int gluehbirne_move=0x7f02000a;
+        public static final int home_icon=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int icon_humidity=0x7f02000d;
+        public static final int icon_temperature=0x7f02000e;
+        public static final int image_button_background=0x7f02000f;
+        public static final int image_button_background_white=0x7f020010;
+        public static final int loading=0x7f020011;
+        public static final int nass_icon=0x7f020012;
+        public static final int no_alarm_icon=0x7f020013;
+        public static final int not_home_icon=0x7f020014;
+        public static final int praterstr3=0x7f020015;
+        public static final int rot_blinken_icon_an=0x7f020016;
+        public static final int rot_blinken_icon_aus=0x7f020017;
+        public static final int settings_icon=0x7f020018;
+        public static final int sound_icon_an=0x7f020019;
+        public static final int sound_icon_aus=0x7f02001a;
+        public static final int trocken_icon=0x7f02001b;
+        public static final int windows_icon_closed=0x7f02001c;
+        public static final int windows_icon_open=0x7f02001d;
     }
     public static final class id {
         public static final int action_settings=0x7f090031;
@@ -111,8 +112,9 @@ public final class R {
     public static final class layout {
         public static final int activity_login=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int dialogue_alarms=0x7f030002;
-        public static final int dialogue_rules=0x7f030003;
+        public static final int activity_main_alt=0x7f030002;
+        public static final int dialogue_alarms=0x7f030003;
+        public static final int dialogue_rules=0x7f030004;
     }
     public static final class menu {
         public static final int login=0x7f080000;

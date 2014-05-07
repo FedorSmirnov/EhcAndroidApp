@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/ll_main_data"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" >
+
+        <ImageView
+            android:id="@+id/iv_main_home"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@drawable/home_icon"
+            android:scaleType="fitCenter"
+            android:src="@drawable/home_icon" />
+
+        <ImageView
+            android:id="@+id/iv_main_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/iv_main_home"
+            android:adjustViewBounds="true"
+            android:contentDescription="@drawable/icon_temperature"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_temperature" />
+
+        <TextView
+            android:id="@+id/tv_main_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_main_temperature"
+            android:adjustViewBounds="true"
+            android:gravity="center"
+            android:scaleType="fitCenter"
+            android:text="@string/temperature"
+            android:textSize="30sp" >
+        </TextView>
+
+        <ImageView
+            android:id="@+id/iv_main_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/tv_main_temperature"
+            android:adjustViewBounds="true"
+            android:contentDescription="@drawable/icon_humidity"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_humidity" />
+
+        <TextView
+            android:id="@+id/tv_main_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_main_humidity"
+            android:adjustViewBounds="true"
+            android:gravity="center"
+            android:scaleType="fitCenter"
+            android:text="@string/humidity"
+            android:textSize="30sp" >
+        </TextView>
+
+        <ImageButton
+            android:id="@+id/ib_main_diaAlarms"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/image_button_background"
+            android:contentDescription="@drawable/alarm_icon"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/alarm_icon" />
+
+        <ImageButton
+            android:id="@+id/ib_main_diaRules"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/ib_main_diaAlarms"
+            android:adjustViewBounds="true"
+            android:background="@drawable/image_button_background"
+            android:contentDescription="@drawable/settings_icon"
+            android:padding="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/settings_icon" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_main_control"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:background="@drawable/friedrich_bauer_mittel" >
+
+        <ImageButton
+            android:id="@+id/ib_main_lampState"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="0dp"
+            android:layout_marginRight="0dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/image_button_background"
+            android:contentDescription="@drawable/gluehbirne_aus"
+            android:scaleType="fitCenter"
+            android:src="@drawable/loading" />
+
+        <ImageView
+            android:id="@+id/iv_main_doorState"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="72dp"
+            android:contentDescription="@drawable/door_closed_icon"
+            android:src="@drawable/door_closed_icon" />
+
+        <ImageView
+            android:id="@+id/iv_main_waterState"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="150dp"
+            android:layout_marginLeft="85dp"
+            android:contentDescription="@drawable/nass_icon"
+            android:src="@drawable/nass_icon" />
+
+        <ImageButton
+            android:id="@+id/ib_main_redLamp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="75dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/image_button_background"
+            android:contentDescription="@drawable/rot_blinken_icon_aus"
+            android:scaleType="fitCenter"
+            android:src="@drawable/rot_blinken_icon_aus" />
+
+        <ImageButton
+            android:id="@+id/ib_main_sound"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="140dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@drawable/sound_icon_aus"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sound_icon_aus" />
+
+        <ImageView
+            android:id="@+id/iv_main_window"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="-10dp"
+            android:layout_marginRight="170dp"
+            android:contentDescription="@drawable/windows_icon_open"
+            android:src="@drawable/windows_icon_open" />
+        
+        <ImageView
+            android:id="@+id/iv_main_flowers"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="85dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="75dp"
+            android:contentDescription="@drawable/giesskanne_icon_ok"
+            android:src="@drawable/giesskanne_icon_ok" />
+        
+    </RelativeLayout>
+
+</LinearLayout>
